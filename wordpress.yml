@@ -1,0 +1,14 @@
+---
+- name: "Wordpress installation/configuration"
+  hosts: amazon
+  become: true
+  vars_files: 
+    - variables.vars
+        
+  tasks:
+    
+    
+    - name: "Apache installation"
+      yum:
+        name: "{{packages}}"
+        state: present
