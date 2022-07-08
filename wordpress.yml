@@ -12,3 +12,10 @@
       yum:
         name: "{{packages}}"
         state: present
+
+    - name: "Apache - Creating vhost /etc/httpd/conf.d/default.conf"
+      template:
+        src: vhost.conf.tmpl
+        dest: /etc/httpd/conf.d/default.conf
+        owner: "{{ apache_user }}"
+        group: "{{ apache_group }}"
