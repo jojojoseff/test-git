@@ -19,3 +19,10 @@
         dest: /etc/httpd/conf.d/default.conf
         owner: "{{ apache_user }}"
         group: "{{ apache_group }}"
+
+    - name: "Apache - Creating documentroot /var/www/html/{{ domain_name }}"
+      file:
+        path: "/var/www/html/{{ domain_name }}"
+        state: directory
+        owner: "{{ apache_user }}"
+        group: "{{ apache_group }}"
