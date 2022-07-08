@@ -26,3 +26,30 @@
         state: directory
         owner: "{{ apache_user }}"
         group: "{{ apache_group }}"
+
+    - name: "Apache - Creating test.html & test.php"
+      copy:
+        src: "{{ item }}"
+        dest: "/var/www/html/{{ domain_name }}"
+        owner: "{{ apache_user }}"
+        group: "{{ apache_group }}"
+      with_items:
+        - info.php
+        - test.html
+    
+    - name: "Apache - PHP installation"
+      shell: amazon-linux-extras install php7.4 -y
+      
+    
+    - name: "Apache - Restarting-enabling PHP-FPM"
+      service:
+        name: php-fpm
+        state: restarted
+        enabled: true
+            
+    
+    - name: "Apache -Restarting-enabling httpd"
+      service:
+        name: httpd
+        state: restarted
+        enabled: true
